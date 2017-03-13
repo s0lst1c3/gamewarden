@@ -1,0 +1,15 @@
+scheduler_db = 'scheduler.db'
+collector_db = 'collector.db'
+config_table = 'gw_config'
+scheduler_table = 'gw_jobs'
+
+iface='wlan0'
+collector_iface = 'wlan0'
+collector_tx_threshold = -69
+ap_start = './scripts/ap-start.sh'
+ap_stop = './scripts/ap-stop.sh'
+scheduler = './scheduler'
+collector = './collector'
+channel_hopper = './channel_hopper'
+hostapd_conf = './conf/hostapd.conf'
+dnsmasq_conf = './conf/dnsmasq.conf'

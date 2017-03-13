@@ -1,0 +1,4 @@
+#!/usr/bin/python
+
+from core import scheduler
+scheduler.scheduler.run()

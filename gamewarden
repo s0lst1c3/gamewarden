@@ -1,0 +1,111 @@
+#!/usr/bin/python
+
+import config
+import os
+import argparse
+from core import hostapd, scheduler
+
+def scheduler_start():
+
+    os.system('%s &' % config.scheduler)
+
+def scheduler_stop():
+
+    os.system('for i in `pgrep scheduler`; do kill $i; done')
+
+def collector_start():
+
+    os.system('%s &' % config.collector)
+    os.system('%s &' % config.channel_hopper)
+
+def collector_stop():
+
+    os.system('for i in `pgrep collector`; do kill $i; done')
+    os.system('for i in `pgrep channel_hopper`; do kill $i; done')
+
+def ap_start():
+
+    os.system('%s %s %s %s' %\
+        (config.ap_start, config.iface,
+            config.hostapd_conf, config.dnsmasq_conf))
+
+def ap_stop():
+
+    os.system('%s %s' % (config.ap_stop, config.iface))
+
+def set_options():
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--start-scheduler',
+                    dest='start_scheduled',
+                    action='store_true',
+                    help='Start AP in scheduled mode.')
+
+    parser.add_argument('--stop-scheduler',
+                    dest='stop_scheduled',
+                    action='store_true',
+                    help='Stop the AP scheduler.')
+
+    parser.add_argument('--start-collector',
+                    dest='start_collector',
+                    action='store_true',
+                    help='Start the metadata collector.')
+
+    parser.add_argument('--stop-collector',
+                    dest='stop_collector',
+                    action='store_true',
+                    help='Stop the metadata collector.')
+
+    parser.add_argument('--stop',
+                    dest='stop',
+                    action='store_true',
+                    help='Stop the AP.')
+
+    parser.add_argument('--start',
+                    dest='start',
+                    action='store_true',
+                    help='Start the AP.')
+
+    parser.add_argument('--set-schedule',
+                    dest='set_schedule',
+                    action='store_true',
+                    help='Start the schedule configuration wizard.')
+
+    parser.add_argument('--ap-config',
+                    dest='ap_config',
+                    action='store_true',
+                    help='Start the AP configuration wizard.')
+
+    return parser, parser.parse_args()
+
+if __name__ == '__main__':
+
+    parser, options = set_options()
+
+    if options.start:
+        ap_start()
+
+    elif options.stop:
+        ap_stop()
+
+    elif options.start_scheduled:
+        scheduler_start()
+    
+    elif options.stop_scheduled:
+        scheduler_stop()
+
+    elif options.start_collector:
+        collector_start()
+    
+    elif options.stop_collector:
+        collector_stop()
+    
+    elif options.set_schedule:
+        scheduler.menu.run()
+
+    elif options.ap_config:
+        hostapd.menu.run()
+
+    else:
+        parser.print_help()
