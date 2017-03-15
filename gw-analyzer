@@ -1,0 +1,128 @@
+#!/usr/bin/python
+
+import sqlite3
+import pandas as pd
+import numpy as np
+import argparse
+import os
+import sys
+
+from datetime import datetime
+from matplotlib import pylab
+from matplotlib import pyplot
+
+remote_path = '~/Projects/gamewarden/'
+
+def get_options():
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--db-file',
+                    dest='db_file', 
+                    default='collector.db',
+                    type=str,
+                    help='Manually specify the name of the database file. Defaults to "collector.db"')
+
+    parser.add_argument('--db-stash',
+                    dest='db_stash', 
+                    default='db-stash',
+                    type=str,
+                    help='Manually specify path of db-stash directory. Defaults to ./db-stash.')
+
+    parser.add_argument('--remote-install-path',
+                    dest='remote_install_path', 
+                    default='/opt/gamewarden',
+                    type=str,
+                    help='Manually specify remote installation path')
+
+    parser.add_argument('--retrieve',
+                    dest='retrieve',
+                    action='store_true',
+                    help='Retreive database file from remote device for analysis and place it in db-stash.')
+
+    parser.add_argument('--analyze',
+                    dest='analyze',
+                    action='store_true',
+                    help='Analyze ingress/egress traffic using database file.')
+
+    parser.add_argument('--show',
+                    dest='show',
+                    action='store_true',
+                    help='Show graph when complete (instead of simply saving to file).')
+
+    parser.add_argument('--output',
+                    dest='output',
+                    default='./png-stash/gw-output-'+str(datetime.now())+'.png',
+                    type=str,
+                    help='Specific output file.')
+
+    parser.add_argument('--collector-ip',
+                    dest='collector_ip',
+                    type=str,
+                    default='10.0.0.1',
+                    help='Manually specify IP of remote collection device. Default to 10.0.0.1')
+
+    args = parser.parse_args()
+
+    return parser, args
+
+def get_dts():
+
+    for entry in cursor.execute('SELECT * from visits;'):
+        ts = entry[2]
+        yield pd.to_datetime(ts)
+
+def run_analyze(options):
+
+    db_file = options.db_file
+    db_stash = options.db_stash
+
+    db_path = os.path.abspath(os.path.join(db_stash, db_file))
+
+    if not os.path.isfile(db_path):
+        return False
+
+    conn = sqlite3.connect(db_path)
+
+    dts = [ pd.to_datetime(entry[2]) for entry in conn.cursor().execute('SELECT * from visits;') ]
+
+    df = pd.DataFrame(dts, columns=['time'])
+    df.set_index('time', drop=False, inplace=True)
+    df.groupby(pd.TimeGrouper(freq='30Min')).count().plot(kind='bar')
+    fig1 = pylab.gcf()
+
+    if options.show:
+        pylab.show()
+
+    pylab.draw()
+    output_path = os.path.abspath(options.output)
+    fig1.savefig(output_path)
+
+    print '[*] Analysis results saved to:', output_path
+    
+    conn.close()
+
+    return True
+
+def retrieve_db(options):
+
+    db_file = options.db_file
+    db_stash = options.db_stash
+    remote_install_path = options.remote_install_path
+
+    remote_db_path = os.path.abspath(os.path.join(remote_install_path, db_stash, db_file))
+    db_path = os.path.abspath(os.path.join(db_stash, db_file))
+    os.system('scp %s:%s %s.tmp' % (options.collector_ip, remote_db_path, db_path))
+    os.system('mv %s.tmp %s' % (db_path, db_path))
+
+if __name__ == '__main__':
+
+    parser, options = get_options()
+
+    if options.retrieve:
+        retrieve_db(options)
+
+    if options.analyze:
+        if not run_analyze(options):
+            sys.exit('[!] Database file not found.')
+

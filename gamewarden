@@ -11,7 +11,7 @@ def scheduler_start():
 
 def scheduler_stop():
 
-    os.system('for i in `pgrep scheduler`; do kill $i; done')
+    os.system('for i in `pgrep gw-scheduler`; do kill $i; done')
 
 def collector_start():
 
@@ -20,8 +20,8 @@ def collector_start():
 
 def collector_stop():
 
-    os.system('for i in `pgrep collector`; do kill $i; done')
-    os.system('for i in `pgrep channel_hopper`; do kill $i; done')
+    os.system('for i in `pgrep gw-collector`; do kill $i; done')
+    os.system('for i in `pgrep gw-channel-hopper`; do kill $i; done')
 
 def ap_start():
 
