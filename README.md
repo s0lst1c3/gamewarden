@@ -6,7 +6,9 @@ Description goes here:
 - how it works
 - etc
 
-   * [gamewarden](#gamewarden)
+Table Of Contents
+=================
+
    * [Usage Instructions](#usage-instructions)
       * [1. Configuring the GameWarden device](#1-configuring-the-gamewarden-device)
       * [2. Connect the GameWarden device to a power source](#2-connect-the-gamewarden-device-to-a-power-source)
