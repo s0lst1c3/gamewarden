@@ -167,7 +167,6 @@ It is recommended that each of the circuits below be completed and tested using 
 
 The first step is to create a circuit to control the blue LED. To do this, connect GPIO Pin #17 to a 220 Ohm resistor. Connect the negative (unused) end of the 220 Ohm resistor to the anode (positive) end of the blue LED (hint: it's the end with the longer piece of wire). Connect the cathode (negative) end of the blue LED (the end with the shorter piece of wire) to an unused ground pin.
 
-between the blue lED, GPIO Pin #17 and a ground 
 ![blue led](./docs/imgs/blue-led.png)
 
 The second step is to create a circuit to control the red LED. To do this, connect GPIO Pin #25 to a 220 Ohm resistor. Connect the negative (unused) end of the 220 Ohm resistor to the anode (positive) end of the red LED (hint: it's the end with the longer piece of wire). Connect the cathode (negative) end of the red LED (the end with the shorter piece of wire) to an unused ground pin.
