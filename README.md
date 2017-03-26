@@ -100,3 +100,7 @@ First Setup Instructions
 Gamewarden is intended to be installed on a Raspberry Pi microcontroller running Raspbien-Lite. The gw-listener script targets _Python 3.3_. All other Python code targets _Python 2.7_.
 
 Python dependencies are listed in `pip.req`. Binary dependencies are listed in `dependencies.txt`.
+
+todo:
+- fill in this section... software setup, hardware setup, etc
+- add table of contents (use this? https://github.com/ekalinin/github-markdown-toc)
