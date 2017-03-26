@@ -159,8 +159,6 @@ Finally, reboot the device using the following command:
 3\. Assembling the GameWarden Device
 ------------------------------------
 
-Building a GameWarden device doesn't require 
-
 GameWarden doesn't use a lot of external parts. Regardless, if you're new to hardware the schematics included in this section may appear dauntning. Don't worry, they're not actually that bad. If you're unsure of how to complete this section, [order one of these for 20 bucks on Amazon](https://www.amazon.com/gp/product/B017C54VZA/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1). It comes with a short, easy to digest guidebook. By the time you reach page 10, you'll know what to do with the schematics.
 
 It is recommended that each of the circuits below be completed and tested using a breakout board before attempting any soldering.
@@ -186,6 +184,4 @@ Test these circuits out by booting up the GameWarden device and then hitting the
 If everything is working correctly, solder together a more permanent version, integrating it with the case you're using. Plug in the two external wireless adapters and add your external battery if you're using one. Congratulations: your GameWarden device is ready for use.
 
 todo:
-- fill in this section... software setup, hardware setup, etc
 - add table of contents (use this? https://github.com/ekalinin/github-markdown-toc)
-- Get GPIO to work with Python2
