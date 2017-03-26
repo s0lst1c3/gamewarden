@@ -7,7 +7,7 @@ Description goes here:
 - etc
 
 Usage Instructions
-------------------
+==================
 
 GameWarden is designed to be used in the manner outlined in the following steps.
 
@@ -48,6 +48,8 @@ Your GameWarden device should now be configured and ready to use.
 ---------------------------------------------------
 
 GameWarden can be run off of a variety of different power sources. Just make sure that whatever you're plugging it into can connect to its microusb power port. We recommend using something like a [Mophie battery](http://www.mophie.com/) for situations in which a power outlet isn't available 9. Otherwise, plug it into a concealed power outlet and adorn it with a label stating "Do not touch. -IT". 
+
+Important note: it is entirely on you to power your GameWarden device is a manner that is safe and legal. The author of GameWarden's source code is not responsible for any damanges caused by your bad/dangerous electrical 
 
 3\. Enable GameWarden's packet sniffer
 --------------------------------------
@@ -94,13 +96,75 @@ Run the following command if you want to learn more about them.
 
 	./gw-analyzer -h
 
-First Setup Instructions
-------------------------
+First Time Setup
+================
 
-Gamewarden is intended to be installed on a Raspberry Pi microcontroller running Raspbien-Lite. The gw-listener script targets _Python 3.3_. All other Python code targets _Python 2.7_.
+To complete this guide, you'll need the following hardware components:
+- 1 Raspberry Pi 3 Model B (with microSD and power supply)
+- 2 TP-Link WN722N external wireless adapters
+- 1 red LED 
+- 1 blue LED
+- 2 tactile push switches
+- 2 220 Ohm resistors 
+- 1 ruggedized case for the Raspberry Pi 3 Model B
 
-Python dependencies are listed in `pip.req`. Binary dependencies are listed in `dependencies.txt`.
+The following items are not required but are highly recommended:
+- 1 breadboard with jumper cables for test purposes
+- 1 Adafruit T-Cobbler Plus GPIO breakout kit for test purposes
+- high capacity external battery
+
+It is recommended that you install the GameWarden software component before assembling the hardware. 
+
+The following steps must be completed in order to build and configure a GameWarden device:
+1. Install Raspbian-Lite on the Raspberry Pi 3
+2. Install and Configure the GameWarden software on the Raspberry Pi 3
+3. Assemble the GameWarden device
+
+Please refer to the appropriate section below for each of the steps listed above.
+
+1\. Installing Raspbian-Lite on the Raspberry Pi 3
+--------------------------------------------------
+
+It is very likely that your Raspberry Pi 3 ships with the NOOBS installation software preloaded on an included microSD card. If that's the case, just select Raspbian-Lite as your installation option. Otherwise, there are plenty of online resources to guide you through Raspbian-Lite installation process. Remember to change the default password on your device. Or don't. It's up to you.
+
+2\. Installing and Configuring the GameWarden software on the Raspberry Pi 3
+----------------------------------------------------------------------------
+
+Gamewarden is intended to be installed on a Raspberry Pi microcontroller running Raspbien-Lite. Python code targets _Python 2.7_.
+
+Pretty much everything in this section should be run as root, so begin by executing the following command.
+
+	sudo -s
+
+Once that's done, install dependencies as follows:
+
+	apt-get install rfkill hostapd dnsmasq python-pip python3 python3-pip git
+
+Next, cd into your /opt directory and clone the GameWarden repo using the following command:
+
+	cd /opt && git clone https://github.com/s0lst1c3/gamewarden.git
+
+Then install Python dependencies using pip:
+
+	pip install -r pip.req
+
+Once that's done, add the following line to your /etc/rc.local file (before the 'exit 0' command at the end of the file):
+
+	/opt/gamewarden/gw-listener
+
+Finally, reboot the device using the following command:
+
+	shutdown -r now
+
+3\. Assembling the GameWarden Device
+------------------------------------
+
+![blue led](./docs/imgs/blue-led.png)
+![blue button](./docs/imgs/blue-button.png)
+![red led](./docs/imgs/red-led.png)
+![red button](./docs/imgs/red-button.png)
 
 todo:
 - fill in this section... software setup, hardware setup, etc
 - add table of contents (use this? https://github.com/ekalinin/github-markdown-toc)
+- Get GPIO to work with Python2
