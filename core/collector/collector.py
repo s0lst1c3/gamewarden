@@ -16,6 +16,15 @@ counter = 0
 
 def log_metadata():
 
+        iface = config.collector_iface
+
+        os.system('ifconfig '+iface+' down')
+        time.sleep(.5)
+        os.system('iwconfig '+iface+' mode monitor')
+        time.sleep(.5)
+        os.system('ifconfig '+iface+' up')
+        time.sleep(.5)
+
         while True:
 
             probe_requests = sniffer.sniff_probes(config.collector_iface)

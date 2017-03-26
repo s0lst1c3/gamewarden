@@ -1,0 +1,95 @@
+#!/usr/bin/python3
+
+import RPi.GPIO as GPIO
+import time
+import os
+
+def enable_led(pin):
+	GPIO.output(pin, True)
+
+def disable_led(pin):
+	GPIO.output(pin, False)
+
+def handle_button_push(index, pin):
+	
+	pin_no = pin[0]
+	gpio_input = GPIO.input(pin_no)
+	prev_input = pin[1]
+	button_color = pin[2]
+	led_is_enabled = pin[3]
+	led_pin_no = pin[4]
+	start_cmd = pin[5]
+	stop_cmd = pin[6]
+	
+	# if the last reading was low and this one is high, print
+	if gpio_input == 1 and prev_input == 0:
+
+		if led_is_enabled:
+
+			os.system(stop_cmd)
+
+			disable_led(led_pin_no)
+			led_is_enabled = False
+		else:
+
+			os.system(start_cmd)
+
+			enable_led(led_pin_no)
+			led_is_enabled = True
+	
+
+	gpio_input_pins[index] = (pin_no,
+						gpio_input,
+						button_color,
+						led_is_enabled,
+						led_pin_no,
+						start_cmd,
+						stop_cmd)
+
+if __name__ == '__main__':
+
+	gpio_red_button = 21
+	gpio_red_led = 25
+	gpio_red_start_cmd = '/opt/gamewarden/gamewarden --start'
+	gpio_red_stop_cmd = '/opt/gamewarden/gamewarden --stop'
+
+	gpio_blue_button = 26
+	gpio_blue_led = 17
+	gpio_blue_start_cmd = '/opt/gamewarden/gamewarden --start-collector'
+	gpio_blue_stop_cmd = '/opt/gamewarden/gamewarden --stop-collector'
+	
+	gpio_input_pins = [
+	
+		(
+			gpio_red_button,
+			1,
+			'red',
+			False,
+			gpio_red_led,
+			gpio_red_start_cmd,
+			gpio_red_stop_cmd),
+		(
+			gpio_blue_button,
+			1,
+			'blue',
+			False,
+			gpio_blue_led,
+			gpio_blue_start_cmd,
+			gpio_blue_stop_cmd),
+	]
+	
+	GPIO.setmode(GPIO.BCM)
+	for g in gpio_input_pins:
+	
+		GPIO.setup(g[0], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+		GPIO.setup(g[4], GPIO.OUT)
+	
+	while True:
+	
+		for index,pin in enumerate(gpio_input_pins):
+			handle_button_push(index, pin)
+			
+		# pause for debounce
+		time.sleep(0.05)
+
+	GPIO.cleanup()

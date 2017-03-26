@@ -1,13 +1,14 @@
-#!/usr/bin/python
-
+#!/usr/bin/python 
 import config
 import os
 import time
 
 while True:
 
+    time.sleep(10)
+
     for channel in xrange(1,13):
     
         #print '[hopper] switching to channel %d' % channel
-        os.system('iw dev %s set channel %d' % (config.collector_iface, channel))
+        os.system('iwconfig %s channel %d' % (config.collector_iface, channel))
         time.sleep(1)

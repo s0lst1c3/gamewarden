@@ -3,7 +3,8 @@ iface=$1
 hostapd_conf=$2
 dnsmasq_conf=$3
 
-systemctl stop network-manager
+#systemctl stop network-manager
+for i in `pgrep wpa_supplicant`; do kill $i; done
 rfkill unblock wlan
 
 # initial wireless interface configuration
