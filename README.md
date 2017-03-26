@@ -1,10 +1,18 @@
 gamewarden
 ==========
 
-Description goes here:
-- what this does
-- how it works
-- etc
+GameWarden is a concealable device that uses wireless traffic to calculate peak hours of use for a building entrace. It is designed to help operators make informed decisions about when to attempt to tailgate into a building during physical security assessments. GameWarden is inspired by systems used by many retail outlets to track peak hours and repeat visits to their stores [1]. A study by the Pew Research Center revealed that 92% of Americans own a cell phone and that 90% of cell phone owners carry their cellular device with them “frequently” [2]. Since wireless devices transmit probe frames at consistent and frequent intervals, this high rate of adoption implies that wireless devices can be used to detect foot traffic through a physical location [1].
+
+GameWarden is battery powered and can easily be concealed near building entrances. It detects when wireless devices are within close proximity by sniffing 802.11 probe frames using a low power antenna. The packet sniffing capability can be easily activated by pressing a button on the side of the device. The data collected by GameWarden includes timestamps, MAC addresses, and sequence numbers. The MAC addresses and sequence numbers are used to identify individual devices, and the timestamps are used to determine peak hours of activity.
+
+Captured data can be exfiltrated from the GameWarden device using its built-in wireless access point. The access point can be concealed by hiding its ESSID, and can be protected using WPA2-PSK and a strong passphrase. To conserve precious battery life and evade detection, GameWarden can be programmed to automatically activate and deactivate its built-in access point at scheduled times. Future iterations of GameWarden will have the capability to exfiltrate data over SMS. 
+
+![graph](./docs/imgs/graph.png)
+
+Once the captured data is exfiltrated from the device, it can be parsed offline using GameWarden’s analysis engine. The analysis engine works by aggregating timestamps into a histogram of half hour intervals, an example of which is shown above.
+
+⋅ [1] http://www.nytimes.com/2013/07/15/business/attention-shopper-stores-are-tracking-your-cell.html
+⋅ [2] http://www.pewinternet.org/2015/08/26/chapter-1-always-on-connectivity/
 
 Table Of Contents
 =================
@@ -197,6 +205,3 @@ The fourth step is to create a circuit to receive input from the blue button. Co
 Test these circuits out by booting up the GameWarden device and then hitting the blue button. This should start the packet sniffer. Hit the blue button again. This should stop the packet sniffer. Next, do the same with the red button to start and stop the built-in access point. 
 
 If everything is working correctly, solder together a more permanent version, integrating it with the case you're using. Plug in the two external wireless adapters and add your external battery if you're using one. Congratulations: your GameWarden device is ready for use.
-
-todo:
-- add table of contents (use this? https://github.com/ekalinin/github-markdown-toc)
