@@ -91,8 +91,8 @@ Run the following command if you want to learn more about them.
 
 	./gw-analyzer -h
 
-Setup Instructions
-------------------
+First Setup Instructions
+------------------------
 
 Gamewarden is intended to be installed on a Raspberry Pi microcontroller running Raspbien-Lite. The gw-listener script targets _Python 3.3_. All other Python code targets _Python 2.7_.
 
