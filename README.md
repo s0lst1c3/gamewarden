@@ -17,8 +17,8 @@ GameWarden is designed to be used in the manner outlined in the following steps.
 
 For detailed instructions on how to complete each of the following steps, please refer to the appropriate section below.
 
-\1. Configuring the GameWarden device
-------------------------------------
+1 - Configuring the GameWarden device
+-------------------------------------
 
 If this is your first time configuring and running GameWarden, please complete the _First Time Setup_ guide before proceeding with this section.
 
