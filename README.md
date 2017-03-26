@@ -6,6 +6,19 @@ Description goes here:
 - how it works
 - etc
 
+   * [gamewarden](#gamewarden)
+   * [Usage Instructions](#usage-instructions)
+      * [1. Configuring the GameWarden device](#1-configuring-the-gamewarden-device)
+      * [2. Connect the GameWarden device to a power source](#2-connect-the-gamewarden-device-to-a-power-source)
+      * [3. Enable GameWarden's packet sniffer](#3-enable-gamewardens-packet-sniffer)
+      * [4. Conceal the GameWarden device](#4-conceal-the-gamewarden-device)
+      * [5. Manually Enabling GameWarden's AP](#5-manually-enabling-gamewardens-ap)
+      * [6. Exfiltrating and Analyzing Data From GameWarden](#6-exfiltrating-and-analyzing-data-from-gamewarden)
+   * [First Time Setup](#first-time-setup)
+      * [1. Installing Raspbian-Lite on the Raspberry Pi 3](#1-installing-raspbian-lite-on-the-raspberry-pi-3)
+      * [2. Installing and Configuring the GameWarden software on the Raspberry Pi 3](#2-installing-and-configuring-the-gamewarden-software-on-the-raspberry-pi-3)
+      * [3. Assembling the GameWarden Device](#3-assembling-the-gamewarden-device)
+
 Usage Instructions
 ==================
 
