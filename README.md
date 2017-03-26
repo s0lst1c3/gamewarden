@@ -1,7 +1,10 @@
 gamewarden
 ==========
 
-Description here. What do this do, how does it do it, etc.
+Description goes here:
+- what this does
+- how it works
+- etc
 
 Usage Instructions
 ------------------
