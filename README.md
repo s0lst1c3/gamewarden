@@ -41,28 +41,28 @@ Once you've configured the scheduler (or decided not to), proceed to configuring
 
 Your GameWarden device should now be configured and ready to use.
 
-2. Connect the GameWarden device to a power source
---------------------------------------------------
+2\. Connect the GameWarden device to a power source
+---------------------------------------------------
 
 GameWarden can be run off of a variety of different power sources. Just make sure that whatever you're plugging it into can connect to its microusb power port. We recommend using something like a [Mophie battery](http://www.mophie.com/) for situations in which a power outlet isn't available 9. Otherwise, plug it into a concealed power outlet and adorn it with a label stating "Do not touch. -IT". 
 
-3. Enable GameWarden's packet sniffer
--------------------------------------
+3\. Enable GameWarden's packet sniffer
+--------------------------------------
 
 To enable GameWarden's packet sniffer, use the blue button attached to the side of the device.
 
-4. Conceal the GameWarden device
---------------------------------
+4\. Conceal the GameWarden device
+---------------------------------
 
 GameWarden should be concealed in a location that will not interfere with wireless reception and where it won't become a fire hazard.
 
-5. Manually Enabling GameWarden's AP
-------------------------------------
+5\. Manually Enabling GameWarden's AP
+-------------------------------------
 
 To manually enable GameWarden's AP, press the red button attached to the side of the device. 
 
-6. Exfiltrating and Analyzing Data From GameWarden
---------------------------------------------------
+6\. Exfiltrating and Analyzing Data From GameWarden
+---------------------------------------------------
 
 To exfiltrate and analyze data from the GameWarden device, first connect to its built-in access point. Then run following
 command. 
