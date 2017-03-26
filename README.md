@@ -159,10 +159,32 @@ Finally, reboot the device using the following command:
 3\. Assembling the GameWarden Device
 ------------------------------------
 
+Building a GameWarden device doesn't require 
+
+GameWarden doesn't use a lot of external parts. Regardless, if you're new to hardware the schematics included in this section may appear dauntning. Don't worry, they're not actually that bad. If you're unsure of how to complete this section, [order one of these for 20 bucks on Amazon](https://www.amazon.com/gp/product/B017C54VZA/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1). It comes with a short, easy to digest guidebook. By the time you reach page 10, you'll know what to do with the schematics.
+
+It is recommended that each of the circuits below be completed and tested using a breakout board before attempting any soldering.
+
+The first step is to create a circuit to control the blue LED. To do this, connect GPIO Pin #17 to a 220 Ohm resistor. Connect the negative (unused) end of the 220 Ohm resistor to the anode (positive) end of the blue LED (hint: it's the end with the longer piece of wire). Connect the cathode (negative) end of the blue LED (the end with the shorter piece of wire) to an unused ground pin.
+
+between the blue lED, GPIO Pin #17 and a ground 
 ![blue led](./docs/imgs/blue-led.png)
-![blue button](./docs/imgs/blue-button.png)
+
+The second step is to create a circuit to control the red LED. To do this, connect GPIO Pin #25 to a 220 Ohm resistor. Connect the negative (unused) end of the 220 Ohm resistor to the anode (positive) end of the red LED (hint: it's the end with the longer piece of wire). Connect the cathode (negative) end of the red LED (the end with the shorter piece of wire) to an unused ground pin.
+
 ![red led](./docs/imgs/red-led.png)
+
+The third step is to create a circuit to receive input from the blue button. Connect one end of the button to GPIO Pin #26. Connect the other end of the button to an unused ground pin.
+
+![blue button](./docs/imgs/blue-button.png)
+
+The fourth step is to create a circuit to receive input from the blue button. Connect one end of the button to GPIO Pin #26. Connect the other end of the button to an unused ground pin.
+
 ![red button](./docs/imgs/red-button.png)
+
+Test these circuits out by booting up the GameWarden device and then hitting the blue button. This should start the packet sniffer. Hit the blue button again. This should stop the packet sniffer. Next, do the same with the red button to start and stop the built-in access point. 
+
+If everything is working correctly, solder together a more permanent version, integrating it with the case you're using. Plug in the two external wireless adapters and add your external battery if you're using one. Congratulations: your GameWarden device is ready for use.
 
 todo:
 - fill in this section... software setup, hardware setup, etc
