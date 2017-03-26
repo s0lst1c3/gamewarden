@@ -11,8 +11,8 @@ Captured data can be exfiltrated from the GameWarden device using its built-in w
 
 Once the captured data is exfiltrated from the device, it can be parsed offline using GameWarden’s analysis engine. The analysis engine works by aggregating timestamps into a histogram of half hour intervals, an example of which is shown above.
 
-⋅ \[1\] http://www.nytimes.com/2013/07/15/business/attention-shopper-stores-are-tracking-your-cell.html
-⋅ \[2\] http://www.pewinternet.org/2015/08/26/chapter-1-always-on-connectivity/
+\⋅ [1] http://www.nytimes.com/2013/07/15/business/attention-shopper-stores-are-tracking-your-cell.html
+\⋅ [2] http://www.pewinternet.org/2015/08/26/chapter-1-always-on-connectivity/
 
 Table Of Contents
 =================
