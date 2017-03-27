@@ -7,9 +7,10 @@ import argparse
 import os
 import sys
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from matplotlib import pylab
 from matplotlib import pyplot
+from config import analyzer_t_threshold, analyzer_seq_delta
 
 remote_path = '~/Projects/gamewarden/'
 
@@ -66,11 +67,40 @@ def get_options():
 
     return parser, args
 
-def get_dts():
 
-    for entry in cursor.execute('SELECT * from visits;'):
-        ts = entry[2]
-        yield pd.to_datetime(ts)
+#TODO: this needs to be thoroughly optimized.
+kv_store = {}
+seq_store = []
+def is_unique_entry(entry):
+
+    global kv_store
+    global seq_store
+
+    mac = str(entry[1])
+    ts = float(entry[2])
+    seq = int(entry[3])
+
+    dt = datetime.fromtimestamp(ts)
+
+    # Set a threshold value of N seconds. For each probe request from source address M captured at time t,
+    # exclude all subsequent probe requests from source address M where time of capture is less than t+N.
+    if mac in kv_store and dt < kv_store[mac] + timedelta(seconds=analyzer_t_threshold):
+        return False
+
+    # Set a threshold value of N seconds. For each probe request captured at time t with sequence number s,
+    # exclude all subsequent probe requests where the time of capture is less than t+N and the sequence number
+    # is between s and s + delta, where delta is a value near s. 
+    in_range = [ s for s in seq_store if s['seq'] >= seq - analyzer_seq_delta and s['seq'] < seq ]
+    for s in in_range:
+
+        s_dt = s['dt']
+        if dt < s_dt + timedelta(seconds=analyzer_t_threshold):
+            return False
+
+    kv_store[mac] = dt
+    seq_store.append( { 'seq' : seq, 'dt' : dt } )
+
+    return True
 
 def run_analyze(options):
 
@@ -84,7 +114,7 @@ def run_analyze(options):
 
     conn = sqlite3.connect(db_path)
 
-    dts = [ pd.to_datetime(entry[2]) for entry in conn.cursor().execute('SELECT * from visits;') ]
+    dts = [ pd.to_datetime(entry[2]) for entry in conn.cursor().execute('SELECT * from visits order by ts;') if is_unique_entry(entry) ]
 
     df = pd.DataFrame(dts, columns=['time'])
     df.set_index('time', drop=False, inplace=True)
