@@ -3,7 +3,7 @@ collector_db = './db-stash/collector.db'
 config_table = 'gw_config'
 scheduler_table = 'gw_jobs'
 
-iface='wlan0'
+iface='wlan1'
 collector_iface = 'wlan1'
 collector_tx_threshold = -69
 ap_start = '/opt/gamewarden/scripts/ap-start.sh'

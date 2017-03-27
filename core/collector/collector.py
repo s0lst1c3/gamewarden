@@ -27,6 +27,20 @@ def log_metadata():
 
         while True:
 
+            probe = sniffer.sniff_probes(config.collector_iface)
+
+            # for testing purposes
+            if probe is None:
+                continue
+                
+            tx = probe['tx']
+            src = probe['src']
+            timestamp = probe['timestamp']
+            seq = probe['seq']
+
+            store_result(tx, src, timestamp, seq)
+
+'''
             probe_requests = sniffer.sniff_probes(config.collector_iface)
 
             for probe in probe_requests:
@@ -39,20 +53,21 @@ def log_metadata():
                 tx = probe['tx']
                 src = probe['src']
                 timestamp = probe['timestamp']
+				seq = probe['seq']
 
                 store_result(tx, src, timestamp)
+'''
 
-def store_result(tx, src, timestamp):
+def store_result(tx, src, timestamp, seq):
 
     global counter
 
     counter += 1
-    cursor.execute('INSERT INTO visits VALUES (?,?,?)', (tx, src, timestamp,))
+    cursor.execute('INSERT INTO visits VALUES (?,?,?,?)', (tx, src, timestamp,seq,))
 
     if counter == 1:
         conn.commit()
         counter = 0
-
 
 def run():
 

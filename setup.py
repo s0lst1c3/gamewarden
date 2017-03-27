@@ -14,7 +14,7 @@ def initialize_dbs():
 
     conn = sqlite3.connect(config.collector_db)
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE visits (tx integer, mac text, ts datetime)''')
+    cursor.execute('''CREATE TABLE visits (tx integer, mac text, ts datetime, seq integer)''')
     conn.commit()
 
     conn.close()
