@@ -75,7 +75,7 @@ Your GameWarden device should now be configured and ready to use.
 
 GameWarden can be run off of a variety of different power sources. Just make sure that whatever you're plugging it into can connect to its microusb power port. We recommend using something like a [Mophie battery](http://www.mophie.com/) for situations in which a power outlet isn't available 9. Otherwise, plug it into a concealed power outlet and adorn it with a label stating "Do not touch. -IT". 
 
-Important note: it is entirely on you to power your GameWarden device is a manner that is safe and legal. The author of GameWarden's source code is not responsible for any damanges caused by your bad/dangerous electrical 
+Important note: it is entirely on you to power your GameWarden device is a manner that is safe and legal. The author of GameWarden's source code is not responsible for any damages caused by your bad/dangerous electrical 
 
 3\. Enable GameWarden's packet sniffer
 --------------------------------------
